@@ -40,6 +40,27 @@
 					<finalName>${project.name}</finalName>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<configuration>
+					<!-- dockerHost指定的是使用哪个主机的docker，如果不填写，则默认为本机-->
+					<!-- <dockerHost>http://localhost:2375</dockerHost>-->
+					<imageName>${docker.image.prefix}/${docker.image.project.prefix}-${project.artifactId}</imageName>
+					<dockerDirectory>${basedir}</dockerDirectory> <!-- 指定 Dockerfile 路径-->
+					<!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+					<!--
+					<resources>
+						<resource>
+							<targetPath>/ROOT</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					-->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	
